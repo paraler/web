@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ajax</title>
+	<style type="text/css">
+		body,input,select,button,h1{
+			font-size: 28px;
+			line-height: 1.7;
+		}
+	</style>
+</head>
+<body>
+	<h1>clerk_query</h1>
+	<label>input the clerk number:</label>
+	<input type="text" id="keyword" />
+	<button id="search">query</button>
+	<p id="serchResult"></p>
+
+	<h1>new_clerk</h1>
+	<label>input the name of clerk</label>
+	<input type="text" id="staffName" /><br />
+	<label>input the number of clerk</label>
+	<input type="text" id="staffName" /><br />
+	<label>selct the sex of clerk</label>
+	<select id="staffSex">
+		<option>woman</option>
+		<option>man</option>
+	</select><br>
+	<label>inutp the job of clerk</label>
+	<input type="text" id="staffJob" /><br>
+	<button id="save">save</button>
+	<p id="createResult"></p>
+
+	<script>
+		document.getElementById("search").onclick=function(){
+			var request=new XMLHttpRequest();
+			request.open("GET","server_huayra.php?number="+document.getElementById("keyword").value);
+			request.send();
+			request.onreadystatechange=function(){
+				if (request.readayState===4) {
+					if(request.status==200){
+						document.getElementById("searchResult").innrHTML=request.responseText;
+					}else{
+						alert("error:"+request.status);
+					}
+				}
+			}
+		}
+
+
+	document.getElementById("save").onclick = function() { 
+	var request = new XMLHttpRequest();
+	request.open("POST", "server_huayra.php");
+	var data = "name=" + document.getElementById("staffName").value 
+	                  + "&number=" + document.getElementById("staffNumber").value 
+	                  + "&sex=" + document.getElementById("staffSex").value 
+	                  + "&job=" + document.getElementById("staffJob").value;
+	request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	request.send(data);
+	request.onreadystatechange = function() {
+		if (request.readyState===4) {
+			if (request.status===200) { 
+				document.getElementById("createResult").innerHTML = request.responseText;
+			} else {
+				alert("发生错误：" + request.status);
+			}
+		} 
+	}
+}
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>tooltip</title>
+	<style type="text/css">
+		#tooltip{
+			position: absolute;
+			border: 1px solid #333;
+			background: #f7f7d1;
+			padding:1px;
+			color: #333;
+			display: none;
+		}
+	</style>
+	<script type="text/javascript" src="../source/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript">
+		$(function{
+			var x=10;
+			var y=20;
+			$("a.tooltip").mouseover(function(e){
+				this.myTitle=this.title;
+				this.title="";
+				var tooltip="<div id='tooltip'>"+this.myTitle+"<\/div>";
+				$("body").append(tooltip);
+				$("#tooltip").css({
+					"top":(e.pageX)+"px",
+					"left":(e.pageY)+"px"
+				}).show();
+			}).mouseout(function{
+				this.title=this.myTitle;
+				$("#tooltip").remove();
+			}).mousemove(function{
+				$("#tooltip").css({
+					"top":(e.pageY+y)+"px",
+					"left":(e.pageX+x)+"px"
+				})
+			});
+		})
+	</script>
+</head>
+<body>
+	<p><a href="#" class="tooltip" title="link hint 1">linnk hint 1</a></p>
+	<p><a href="#" class="tooltip" title="link hint 2">linnk hint 2</a></p>
+</body>
+</html>

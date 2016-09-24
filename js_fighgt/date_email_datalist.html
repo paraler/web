@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>js_email_datalist</title>
+</head>
+<body>
+	<div id="email">
+		email: <input id="umail" type="email" list="lst" autofocus="autofocus" required="required" placeholder="please input email" autocomplete="off" /><br /><br />
+		<datalist id="lst"></datalist>
+	</div>
+	<!-- <div id="date">
+		<input type="date" />
+		<input type="month" />
+		<input type="datetime-local" name="">
+		<input type="week" />
+	</div> -->
+	<script type="text/javascript">
+		var eg={};
+		eg.$=function(id){
+			return document.getElementById(id);
+		}
+		var umail=eg.$("umail");
+		var lst=eg.$("lst");
+		datalist=["qq.com","163.com","gmail.com","sina.com"];
+				document.write(datalist.length);
+		addEventListener(umail,"input",function(){
+			lst.innerHTMl=" ";
+			var k=umail.value;
+			if(k.indexOf("@")>-1) return;//if hava value,do not create
+			if(k=="") return;//if clear and left nothing 
+				var newStr="";
+				for(var i=0;i<datalist.length;i++){
+					newStr+='<option value="'+k+"@"+datalist[i]+'"/>';
+				}
+				lst.innerHTMl=newStr;
+		});
+	</script>
+</body>
+</html>

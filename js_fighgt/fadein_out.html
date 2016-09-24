@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>text_edit</title>
+	<style type="text/css">
+        .effect{
+            width:200px;
+            height:200px;
+            background:gray;
+        }
+	</style>
+	<script type="text/javascript" src="../source/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div class="divTitle">
+        <input id="Button1" type="button" value="fade in" class="btn" />
+        <input id="Button2" type="button" value="fade out" class="btn" />
+    </div>
+    <div class="divContent">
+        <div class="divTip"></div>
+        <div class="effect"></div>
+    </div>
+    <script>
+        $(function(){
+            $img=$('.effect');
+            $tip=$(".divTip");
+            $("input:eq(0)").click(function(){
+                $tip.html("");
+                $img.fadeIn(3000,function(){
+                    $tip.html("fadein successful!");
+                })
+            })
+            $("input:eq(1)").click(function(){
+                $tip.html("");
+                $img.fadeOut(3000,function(){
+                    $tip.html("fadeout successful!");
+                })
+            })
+        })
+    </script>
+</body>
+</html>

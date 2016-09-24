@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>waterfall_flow</title>
+	<script type="text/javascript" src="../source/jquery-3.1.1.min.js"></script>
+	<style type="text/css">
+		.main{
+			width: 880px;
+			margin:0 auto;
+		}
+		.main .col{
+			width: 216px;
+			float: left;
+			margin: 2px;
+			_margin:1px;
+		}
+		.main .col img{
+			width: 210px;
+			border: 1px solid #c3c3c3;
+			padding: 2px;
+			margin: 2px 0;
+		}
+		.main .col p{
+			text-align: center;
+			margin: 0px;
+			padding: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="col"><img src="1.jpg" alt=""/><p>[1.jpg]</p></div>
+		<div class="col"><img src="2.jpg" alt=""/><p>[2.jpg]</p></div>
+		<div class="col"><img src="3.jpg" alt=""/><p>[3.jpg]</p></div>
+		<div class="col"><img src="4.jpg" alt=""/><p>[4.jpg]</p></div>
+	</div>	
+		<script type="text/javascript">
+			getDataList=function(min,max){
+				var lst=[],n=8;
+				for(var i=0;i<n;i++){
+					var k=min+parseInt(Math.random()*(max-min));
+					lst.push(k+"jpg");
+				}
+				return lst;
+			}
+			getClassName=function(className,element){
+				if(document.getElementByClassName){
+					return(element||document).getElementsByClassName(className)
+				}
+				var children=(element||document).getElementsByTagName('*');
+				var elements=[];
+				for(var i=0;i<children.lenght;i++){
+					var child=children[i];s
+					var classNames=child.className.split(' ');
+					for(var j=0;j<classNmes.lenght;j++){
+						if(classNames[j]==className){
+							elements.push(child);
+							break;
+						}
+					}
+				}
+				return elements; 
+			}
+
+			cols=getClassName("col");
+			// console.log(cols);
+			colh=[0,0,0,0];
+			getColMin=function(){
+				var min=0,m={};
+				for(var i=0;i<4;i++){
+					min=parseInt(cols[i].offsetHeight);
+					colh[i]=min;
+					m[min]=i;
+				}
+				return cols[m[Math.min.apply(Array,colh)]||0];
+			}
+			
+			add=function(dl){
+				for(i in dl){
+					var newDiv=document.createElement("div");
+					var newImg=document.createElement("img");
+					mewImg.src=dl[i];
+					newDiv.appendChild(newImg);
+					newDiv.innerHTML='<p>['+dl[i]+'</p>';
+					getColMin().appendChild(newDiv);
+				}
+			}
+			scroll=function(){
+				window.onscroll=function(){
+					var doc=document;
+					var top=doc.documentElement.scrollTop||doc.body.scrollTop;
+					var winH=documentElement.clientHeight||doc.body.clientHeight;
+					if(Math.min.apply(Array,colh)<top+winH){
+						add(getDataList(1,35));
+					}
+				}
+			}
+		</script>
+			<script type="text/javascript">
+			getColMin();
+			var dl=getDataList(5,35);
+			add(dl);
+			scroll();
+	</script>
+</body>
+</html>

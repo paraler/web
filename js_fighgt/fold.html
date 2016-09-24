@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>text_edit</title>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript" src="../source/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <fieldset>
+        <legend>can fold list</legend>
+        <ul>
+            <li>list 1</li>
+            <li>list 2</li>
+            <li>list 3
+                <ul>
+                    <li>list 3.1</li>
+                    <li>list 3.2
+                        <ul>
+                            <li>list 3.2.1</li>
+                            <li>list 3.2.2</li>
+                            <li>list 3.2.3</li>
+                        </ul>
+                    </li>
+                    <li>list 3.3</li>
+                </ul>
+            </li>
+        </ul>
+    </fieldset>
+    <script>
+        $(function(){
+            $('li:has(ul)').click(function(event){
+                if($(this).children().is(':hidden')){
+                    $(this).css('list-style','none').children().show();
+                }else{
+                    $(this).css('list-style','none').children().hide();
+                }
+                return false;
+            }).css('cursor','poinnter').click();
+            $('li:not(:has(ul))').css({
+                cursor:'default',
+                'list-style':'none'
+            });
+        })
+    </script>
+</body>
+</html>

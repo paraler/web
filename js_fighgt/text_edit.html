@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>text_edit</title>
+	<style type="text/css">
+		.msg_caption span{
+			background: gray;
+			display: inline-block;
+			padding: 5px;
+			margin: 5px;
+		}
+	</style>
+	<script type="text/javascript" src="../source/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<form action="" method="post">
+		<div class="msg">
+			<div class="msg_caption">
+				<span class="bigger">up(+)</span>
+				<span class="smaller">down(-)</span>
+				</div>
+				<div>
+					<textarea id="comment" rows="8" cols="25" placeholder="input text in here">
+						
+					</textarea>
+				</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		$(function(){
+			var $comment=$('#comment');
+			$('.bigger').click(function(){
+				if(!$comment.is(":animated")){
+					if($comment.height()<500){
+						$comment.animate({height:"+=50"},400);
+					}
+				}
+			})
+			$('.smaller').click(function(){
+				if(!$comment.is(":animated")){
+					if($comment.height()>50){
+						$comment.animate({height:"-=50"},400);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>
